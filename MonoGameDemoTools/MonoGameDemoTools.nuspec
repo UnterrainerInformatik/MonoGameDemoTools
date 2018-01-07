@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>$id$</id>
+    <version>$version$</version>
+    <title>$title$</title>
+    <authors>Unterrainer Informatik OG Team</authors>
+    <owners>Public Domain</owners>
+    <licenseUrl>http://unlicense.org</licenseUrl>
+	<iconUrl>https://github.com/UnterrainerInformatik/MonoGameDemoTools/raw/master/icon.png</iconUrl>
+    <projectUrl>https://github.com/UnterrainerInformatik/MonoGameDemoTools</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>This is a PCL library that contains helper classes that should make writing demos with and for MonoGame more comfortable.
+	In general it contains tools that are boilerplate code and would rather distract the user from the demo.
+	</description>
+    <summary>
+      This is a PCL library that contains helper classes that should make writing demos with and for MonoGame more comfortable.
+    </summary>
+    <releaseNotes></releaseNotes>
+    <copyright>Copyright 2018</copyright>
+    <language>en-US</language>
+    <tags>monogame demo tools debug debugging</tags>
+  </metadata>
+</package>
