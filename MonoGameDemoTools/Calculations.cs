@@ -25,19 +25,43 @@
 // For more information, please refer to <http://unlicense.org>
 // ***************************************************************************
 
-using System;
 using JetBrains.Annotations;
 using Microsoft.Xna.Framework;
+using MonoGameDemoTools.Structures;
 
 namespace MonoGameDemoTools
 {
     [PublicAPI]
-    public static class Demo
+    public static class Calculations
     {
-        public static Color GetLerpColor(GameTime gameTime, Color? from = null, Color? to = null)
+        public static PositionTrajectory ConstrainAndReflect(Vector2 position, Vector2 trajectory, RectangleF bounds)
         {
-            var t = .5f + .5f * (float) Math.Sin(5 * gameTime.TotalGameTime.TotalSeconds);
-            return Color.Lerp(from ?? Color.White, to ?? Color.Gray, t);
+            PositionTrajectory r = new PositionTrajectory(position, trajectory);
+            if (r.Position.X <= bounds.X)
+            {
+                r.Position = new Vector2(bounds.X, r.Position.Y);
+                r.Trajectory = new Vector2(-r.Trajectory.X, r.Trajectory.Y);
+            }
+
+            if (r.Position.X >= bounds.X + bounds.Width)
+            {
+                r.Position = new Vector2(bounds.X + bounds.Width, r.Position.Y);
+                r.Trajectory = new Vector2(-r.Trajectory.X, r.Trajectory.Y);
+            }
+
+            if (r.Position.Y <= bounds.Y)
+            {
+                r.Position = new Vector2(r.Position.X, bounds.Y);
+                r.Trajectory = new Vector2(r.Trajectory.X, -r.Trajectory.Y);
+            }
+
+            if (r.Position.Y >= bounds.Y + bounds.Height)
+            {
+                r.Position = new Vector2(r.Position.X, bounds.Y + bounds.Height);
+                r.Trajectory = new Vector2(r.Trajectory.X, -r.Trajectory.Y);
+            }
+
+            return r;
         }
     }
 }

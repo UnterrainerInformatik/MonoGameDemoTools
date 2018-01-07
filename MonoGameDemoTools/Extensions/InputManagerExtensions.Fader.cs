@@ -25,19 +25,27 @@
 // For more information, please refer to <http://unlicense.org>
 // ***************************************************************************
 
-using System;
-using JetBrains.Annotations;
-using Microsoft.Xna.Framework;
+using InputStateManager;
+using Intervals;
+using Microsoft.Xna.Framework.Input;
 
 namespace MonoGameDemoTools
 {
-    [PublicAPI]
-    public static class Demo
+    public static partial class InputManagerExtensions
     {
-        public static Color GetLerpColor(GameTime gameTime, Color? from = null, Color? to = null)
+        public static bool FaderInput(this InputManager input, Keys down, Keys up, float step, Fader f,
+            bool repeat = false)
         {
-            var t = .5f + .5f * (float) Math.Sin(5 * gameTime.TotalGameTime.TotalSeconds);
-            return Color.Lerp(from ?? Color.White, to ?? Color.Gray, t);
+            bool isModified = false;
+            f.Value = input.FloatInput(down, up, step, (float) f.Value, ref isModified, repeat);
+            return isModified;
+        }
+
+        public static bool FaderInput(this InputManager input, Keys key, float step, Fader f, bool repeat = false)
+        {
+            bool isModified = false;
+            f.Value = input.FloatInput(key, step, (float) f.Value, ref isModified, repeat);
+            return isModified;
         }
     }
 }

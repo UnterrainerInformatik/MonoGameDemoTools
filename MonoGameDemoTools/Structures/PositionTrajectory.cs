@@ -25,19 +25,21 @@
 // For more information, please refer to <http://unlicense.org>
 // ***************************************************************************
 
-using System;
 using JetBrains.Annotations;
 using Microsoft.Xna.Framework;
 
-namespace MonoGameDemoTools
+namespace MonoGameDemoTools.Structures
 {
     [PublicAPI]
-    public static class Demo
+    public struct PositionTrajectory
     {
-        public static Color GetLerpColor(GameTime gameTime, Color? from = null, Color? to = null)
+        public Vector2 Position { get; set; }
+        public Vector2 Trajectory { get; set; }
+        
+        public PositionTrajectory(Vector2 position, Vector2 trajectory)
         {
-            var t = .5f + .5f * (float) Math.Sin(5 * gameTime.TotalGameTime.TotalSeconds);
-            return Color.Lerp(from ?? Color.White, to ?? Color.Gray, t);
+            Position = position;
+            Trajectory = trajectory;
         }
     }
 }

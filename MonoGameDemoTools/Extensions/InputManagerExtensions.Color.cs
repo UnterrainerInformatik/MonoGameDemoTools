@@ -25,19 +25,42 @@
 // For more information, please refer to <http://unlicense.org>
 // ***************************************************************************
 
-using System;
+using InputStateManager;
 using JetBrains.Annotations;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Input;
 
 namespace MonoGameDemoTools
 {
     [PublicAPI]
-    public static class Demo
+    public static partial class InputManagerExtensions
     {
-        public static Color GetLerpColor(GameTime gameTime, Color? from = null, Color? to = null)
+        public static Color ColorInput(this InputManager input, Keys? keyR, Keys? keyG, Keys? keyB, Keys? keyA, Color c,
+            ref bool isModified)
         {
-            var t = .5f + .5f * (float) Math.Sin(5 * gameTime.TotalGameTime.TotalSeconds);
-            return Color.Lerp(from ?? Color.White, to ?? Color.Gray, t);
+            Color color = c;
+            int v = input.Key.Is.CtrlDown || input.Key.Is.ShiftDown ? 1 : -1;
+            if (keyR != null && input.Key.Is.Down(keyR.Value))
+            {
+                color = new Color((color.R + v).Clamp(0, 255), color.G, color.B, color.A);
+                isModified = true;
+            }
+            if (keyG != null && input.Key.Is.Down(keyG.Value))
+            {
+                color = new Color(color.R, (color.G + v).Clamp(0, 255), color.B, color.A);
+                isModified = true;
+            }
+            if (keyB != null && input.Key.Is.Down(keyB.Value))
+            {
+                color = new Color(color.R, color.G, (color.B + v).Clamp(0, 255), color.A);
+                isModified = true;
+            }
+            if (keyA != null && input.Key.Is.Down(keyA.Value))
+            {
+                color = new Color(color.R, color.G, color.B, (color.A + v).Clamp(0, 255));
+                isModified = true;
+            }
+            return color;
         }
     }
 }

@@ -25,19 +25,25 @@
 // For more information, please refer to <http://unlicense.org>
 // ***************************************************************************
 
-using System;
 using JetBrains.Annotations;
 using Microsoft.Xna.Framework;
 
-namespace MonoGameDemoTools
+namespace MonoGameDemoTools.Structures
 {
     [PublicAPI]
-    public static class Demo
+    public class RectangleF
     {
-        public static Color GetLerpColor(GameTime gameTime, Color? from = null, Color? to = null)
+        public Vector2 TopLeft { get; }
+        public Vector2 WidthHeight { get; }
+        public float X => TopLeft.X;
+        public float Y => TopLeft.Y;
+        public float Width => WidthHeight.X;
+        public float Height => WidthHeight.Y;
+
+        public RectangleF(Vector2 topLeft, Vector2 widthHeight)
         {
-            var t = .5f + .5f * (float) Math.Sin(5 * gameTime.TotalGameTime.TotalSeconds);
-            return Color.Lerp(from ?? Color.White, to ?? Color.Gray, t);
+            TopLeft = topLeft;
+            WidthHeight = widthHeight;
         }
     }
 }

@@ -25,19 +25,47 @@
 // For more information, please refer to <http://unlicense.org>
 // ***************************************************************************
 
-using System;
 using JetBrains.Annotations;
-using Microsoft.Xna.Framework;
 
 namespace MonoGameDemoTools
 {
     [PublicAPI]
-    public static class Demo
+    public static class NumbersExtensions
     {
-        public static Color GetLerpColor(GameTime gameTime, Color? from = null, Color? to = null)
+        public static float Clamp(this float value, float max)
         {
-            var t = .5f + .5f * (float) Math.Sin(5 * gameTime.TotalGameTime.TotalSeconds);
-            return Color.Lerp(from ?? Color.White, to ?? Color.Gray, t);
+            return value.Clamp(0, max);
+        }
+        
+        public static float Clamp(this float value, float min, float max)
+        {
+            if (value.CompareTo(min) < 0) return min;
+            if (value.CompareTo(max) > 0) return max;
+            return value;
+        }
+
+        public static int Clamp(this int value, int max)
+        {
+            return value.Clamp(0, max);
+        }
+
+        public static int Clamp(this int value, int min, int max)
+        {
+            if (value.CompareTo(min) < 0) return min;
+            if (value.CompareTo(max) > 0) return max;
+            return value;
+        }
+
+        public static double Clamp(this double value, double max)
+        {
+            return value.Clamp(0, max);
+        }
+
+        public static double Clamp(this double value, double min, double max)
+        {
+            if (value.CompareTo(min) < 0) return min;
+            if (value.CompareTo(max) > 0) return max;
+            return value;
         }
     }
 }

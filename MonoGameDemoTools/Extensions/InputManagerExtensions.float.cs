@@ -25,19 +25,41 @@
 // For more information, please refer to <http://unlicense.org>
 // ***************************************************************************
 
-using System;
-using JetBrains.Annotations;
-using Microsoft.Xna.Framework;
+using InputStateManager;
+using Microsoft.Xna.Framework.Input;
 
 namespace MonoGameDemoTools
 {
-    [PublicAPI]
-    public static class Demo
+    public static partial class InputManagerExtensions
     {
-        public static Color GetLerpColor(GameTime gameTime, Color? from = null, Color? to = null)
+        public static float FloatInput(this InputManager input, Keys down, Keys up, float step, float value,
+            ref bool isModified, bool repeat = false)
         {
-            var t = .5f + .5f * (float) Math.Sin(5 * gameTime.TotalGameTime.TotalSeconds);
-            return Color.Lerp(from ?? Color.White, to ?? Color.Gray, t);
+            float v = 0;
+            if (!repeat && input.Key.Is.Press(up) || repeat && input.Key.Is.Down(up))
+            {
+                v = step;
+                isModified = true;
+            }
+            if (!repeat && input.Key.Is.Press(down) || repeat && input.Key.Is.Down(down))
+            {
+                v = -step;
+                isModified = true;
+            }
+            return value + v;
+        }
+
+        public static float FloatInput(this InputManager input, Keys key, float step, float value, ref bool isModified,
+            bool repeat = false)
+        {
+            float mult = input.Key.Is.CtrlDown || input.Key.Is.ShiftDown ? -1 : 1;
+            float v = 0;
+            if (!repeat && input.Key.Is.Press(key) || repeat && input.Key.Is.Down(key))
+            {
+                v = -step * mult;
+                isModified = true;
+            }
+            return value + v;
         }
     }
 }

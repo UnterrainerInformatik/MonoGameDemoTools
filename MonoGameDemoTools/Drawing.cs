@@ -25,19 +25,26 @@
 // For more information, please refer to <http://unlicense.org>
 // ***************************************************************************
 
-using System;
 using JetBrains.Annotations;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace MonoGameDemoTools
 {
     [PublicAPI]
-    public static class Demo
+    public static class Drawing
     {
-        public static Color GetLerpColor(GameTime gameTime, Color? from = null, Color? to = null)
+        private static Texture2D pixel;
+
+        public static Texture2D GetWhitePixel(this SpriteBatch spriteBatch)
         {
-            var t = .5f + .5f * (float) Math.Sin(5 * gameTime.TotalGameTime.TotalSeconds);
-            return Color.Lerp(from ?? Color.White, to ?? Color.Gray, t);
+            if (pixel == null)
+            {
+                pixel = new Texture2D(spriteBatch.GraphicsDevice, 1, 1, false, SurfaceFormat.Color);
+                pixel.SetData(new[] {Color.White});
+            }
+
+            return pixel;
         }
     }
 }
