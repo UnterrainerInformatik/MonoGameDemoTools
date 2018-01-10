@@ -1,5 +1,4 @@
-[![NuGet](https://img.shields.io/nuget/v/MonoGameDemoTools.svg)](https://www.nuget.org/packages/MonoGameDemoTools/)
- [![license](https://img.shields.io/github/license/unterrainerinformatik/MonoGameDemoTools.svg?maxAge=2592000)](http://unlicense.org)  [![Twitter Follow](https://img.shields.io/twitter/follow/throbax.svg?style=social&label=Follow&maxAge=2592000)](https://twitter.com/throbax)  
+[![NuGet](https://img.shields.io/nuget/v/MonoGameDemoTools.svg)](https://www.nuget.org/packages/MonoGameDemoTools/) [![NuGet](https://img.shields.io/nuget/dt/MonoGameDemoTools.svg)](https://www.nuget.org/packages/MonoGameDemoTools/) [![license](https://img.shields.io/github/license/unterrainerinformatik/MonoGameDemoTools.svg?maxAge=2592000)](http://unlicense.org)  [![Twitter Follow](https://img.shields.io/twitter/follow/throbax.svg?style=social&label=Follow&maxAge=2592000)](https://twitter.com/throbax)  
 
 # General
 
